@@ -1,0 +1,23 @@
+import 'package:app_noticias/home_page.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      title: 'Portal Notícias',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        scaffoldBackgroundColor: const Color(
+          0xFFF8FAFC,
+        ), //0xFF = é um prefixo para colocar cor em hexadecimal
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.transparent,
+          elevation: 4.0,
+        ),
+      ),
+      home: const HomePage(),
+    ),
+  );
+}
