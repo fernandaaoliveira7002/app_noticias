@@ -29,6 +29,41 @@ class HomePage extends StatelessWidget {
         ],
       ),
       drawer: const Drawer(),
+      body: Column(
+        children: [
+          SizedBox(
+            height: 45,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              children: categorias.map((categoria) {
+                final selecionada = categoria == 'Todas';
+                return Container(
+                  margin: const EdgeInsets.only(right: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: selecionada
+                          ? Colors.black
+                          : const Color(0xFFEDEDED),
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    categoria,
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
