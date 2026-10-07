@@ -4,37 +4,37 @@ import 'package:flutter/material.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  static List<Map<String, String>> noticias = [
+  static List<Map<String, dynamic>> noticias = [
     {
-      'título': 'Novo aplicativo facilita a rotina dos estudantes',
+      'titulo': 'Novo aplicativo facilita a rotina dos estudantes',
       'resumo':
           'Ferramenta reúne recursos para organização e acompanhamento dos estudos.',
       'categoria': 'Tecnologia',
       'data': '06/10/2026',
     },
     {
-      'título': 'Brasil anuncia novas medidas para educação',
+      'titulo': 'Brasil anuncia novas medidas para educação',
       'resumo':
           'Novas iniciativas buscam melhorar o acesso e a qualidade do ensino.',
       'categoria': 'Educação',
       'data': '05/10/2026',
     },
     {
-      'título': 'Mercado de tecnologia cresce no país',
+      'titulo': 'Mercado de tecnologia cresce no país',
       'resumo':
           'Setor registra aumento na procura por profissionais e novos serviços digitais.',
       'categoria': 'Economia',
       'data': '04/10/2026',
     },
     {
-      'título': 'Festival cultural reúne artistas brasileiros',
+      'titulo': 'Festival cultural reúne artistas brasileiros',
       'resumo':
           'Evento contará com música, exposições e apresentações durante o fim de semana.',
       'categoria': 'Cultura',
       'data': '03/10/2026',
     },
     {
-      'título': 'Pesquisa revela hábitos de leitura dos brasileiros',
+      'titulo': 'Pesquisa revela hábitos de leitura dos brasileiros',
       'resumo':
           'Estudo aponta mudanças nos hábitos de consumo de livros nos últimos anos.',
       'categoria': 'Literatura',
@@ -110,6 +110,7 @@ class HomePage extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 12),
                   color: Colors.white,
                   elevation: 0,
+                  clipBehavior: Clip.antiAlias,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                     side: const BorderSide(
@@ -124,22 +125,56 @@ class HomePage extends StatelessWidget {
                         color: const Color(0xFFE4e9EF),
                         child: const Icon(Icons.image_outlined),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.all(12),
+                      Padding(
+                        padding: const EdgeInsets.all(12),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               children: [
-                                Text('Tecnologia'),
-                                SizedBox(
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFEFF4F8),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Text(
+                                    noticia['categoria'],
+                                    style: const TextStyle(fontSize: 11),
+                                  ),
+                                ),
+                                const SizedBox(
                                   width: 15,
                                 ),
-                                Text('06/10/2026'),
+                                Text(
+                                  noticia['data'],
+                                  style: const TextStyle(fontSize: 11),
+                                ),
                               ],
                             ),
+                            const SizedBox(
+                              height: 8,
+                            ),
                             Text(
-                              'Estudo aponta mudanças nos hábitos de consumo de livros nos últimos anos',
+                              noticia['titulo'],
+                              style: const TextStyle(
+                                fontSize: 15,
+                                color: Color(0xFF1b2a4a),
+                                fontWeight: FontWeight.bold,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              noticia['resumo'],
+                              style: const TextStyle(
+                                fontSize: 13,
+                                color: Color(0xFF5B6B79),
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ],
                         ),
