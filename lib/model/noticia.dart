@@ -22,9 +22,9 @@ class Noticia {
       id: json['id'],
       titulo: json['titulo'],
       resumo: json['resumo'],
-      conteduo: json['conteduo'],
+      conteduo: json['conteudo'],
       categoriaId: json['categoria_id'],
-      createAt: json['created_at'],
+      createAt: DateTime.parse(json['created_at']),
     );
   }
 
