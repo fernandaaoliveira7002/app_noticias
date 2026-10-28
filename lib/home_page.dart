@@ -1,5 +1,7 @@
 import 'package:app_noticias/detalhe_noticia_page.dart';
+import 'package:app_noticias/model/categoria.dart';
 import 'package:app_noticias/model/noticia.dart';
+import 'package:app_noticias/services/categoria_service.dart';
 import 'package:app_noticias/services/noticia_service.dart';
 import 'package:app_noticias/sobre_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,20 +17,30 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final NoticiaService _noticiaService = NoticiaService();
   late Future<List<Noticia>> _listaNoticias;
+  final CategoriaService _categoriaService = CategoriaService();
+
+  List<Categoria> _listacategorias = [];
+
+  final String _categoriaSelecionada = 'Todas';
 
   @override
   void initState() {
     super.initState();
     _listaNoticias = _noticiaService.getNoticias();
+    carregarCategorias();
   }
 
-  static final List<String> categorias = [
-    'Todos',
-    'Tecnologia',
-    'Educação',
-    'Economia',
-    'Esporte',
-  ];
+  Future<void> carregarCategorias() async {
+    try {
+      final categorias = await _categoriaService.getCategoria();
+      setState(() {
+        _listacategorias = categorias;
+      });
+    } catch (e) {
+      debugPrint('Erro ao carregar as categorias: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,11 +89,17 @@ class _HomePageState extends State<HomePage> {
         children: [
           SizedBox(
             height: 45,
-            child: ListView(
+            child: ListView.builder(
+              itemCount: _listacategorias.length + 1,
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              children: categorias.map((categoria) {
-                final selecionada = categoria == 'Todas';
+              itemBuilder: (context, index) {
+                final categoria = index == 0
+                    ? 'Todas'
+                    : _listacategorias[index - 1].nome;
+
+                final selecionada = _categoriaSelecionada == categoria;
+
                 return Container(
                   margin: const EdgeInsets.only(right: 8),
                   padding: const EdgeInsets.symmetric(
@@ -103,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                     style: const TextStyle(fontSize: 12),
                   ),
                 );
-              }).toList(),
+              },
             ),
           ),
           Expanded(
