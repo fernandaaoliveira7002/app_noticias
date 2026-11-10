@@ -1,4 +1,5 @@
 import 'package:app_noticias/detalhe_noticia_page.dart';
+import 'package:app_noticias/login_page.dart';
 import 'package:app_noticias/model/categoria.dart';
 import 'package:app_noticias/model/noticia.dart';
 import 'package:app_noticias/services/categoria_service.dart';
@@ -124,6 +125,22 @@ class _HomePageState extends State<HomePage> {
                   context,
                   MaterialPageRoute(
                     builder: (_) => const SobrePage(),
+                  ),
+                );
+              },
+            ),
+
+            const Divider(),
+
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('Login'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const LoginPage(),
                   ),
                 );
               },
