@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Noticia {
   final int id;
   final String titulo;
@@ -5,6 +7,7 @@ class Noticia {
   final String conteduo;
   final String? imagem;
   final int categoriaId;
+  final int ativo;
   final String categoriaNome;
   final DateTime createAt;
 
@@ -15,6 +18,7 @@ class Noticia {
     required this.conteduo,
     this.imagem,
     required this.categoriaId,
+    required this.ativo,
     required this.categoriaNome,
     required this.createAt,
   });
@@ -26,6 +30,7 @@ class Noticia {
       resumo: json['resumo'],
       conteduo: json['conteudo'],
       imagem: json['imagem'],
+      ativo: json['ativo'],
       categoriaId: json['categoria_id'],
       categoriaNome: json['categoria_nome'],
       createAt: DateTime.parse(json['created_at']),
